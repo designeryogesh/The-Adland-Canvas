@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Adland Canvas · Daily Indian Agency Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #F04D23;
+      --ink: #0E0D0C;
+      --card: #1A1816;
+      --cream: #F5F1EC;
+      --body-muted: #C9C2BA;
+      --caption: #8F877E;
+      --border-line: rgba(245, 241, 236, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--ink);
+      color: var(--cream);
+      font-family: 'Instrument Sans', sans-serif;
+      line-height: 1.55;
+      padding: 32px 24px;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .masthead-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .masthead-title span { color: var(--orange); }
+
+    .masthead-meta {
+      text-align: right;
+      font-size: 13px;
+      color: var(--caption);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-line);
+      margin-bottom: 32px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--caption);
+    }
+
+    .meta-bar .badge {
+      color: var(--cream);
+      background: var(--card);
+      border: 1px solid var(--border-line);
+      padding: 4px 10px;
+      font-weight: 700;
+    }
+
+    .newspaper-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .newspaper-grid { grid-template-columns: 1fr; }
+    }
+
+    .lead-story {
+      border-right: 1px solid var(--border-line);
+      padding-right: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .lead-story { border-right: none; padding-right: 0; }
+    }
+
+    .kicker {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.2px;
+      color: var(--orange);
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+
+    .kicker::after {
+      content: '';
+      width: 34px;
+      height: 3px;
+      background-color: var(--orange);
+      margin-top: 6px;
+    }
+
+    h1.display-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 16px 0 20px;
+    }
+
+    .story-image {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-line);
+      filter: grayscale(20%) contrast(110%);
+    }
+
+    .body-copy {
+      font-size: 15px;
+      color: var(--body-muted);
+      margin-bottom: 24px;
+      column-count: 2;
+      column-gap: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .body-copy { column-count: 1; }
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background-color: var(--card);
+      border: 1px solid var(--border-line);
+      padding: 24px;
+    }
+
+    .card.accent {
+      border-left: 4px solid var(--orange);
+    }
+
+    .card-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.0;
+      margin: 12px 0 8px;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      background: var(--orange);
+      color: var(--ink);
+      padding: 2px 8px;
+      margin-bottom: 8px;
+    }
+
+    .bottom-section {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-line);
+    }
+
+    .section-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 800px) {
+      .three-col { grid-template-columns: 1fr; }
+    }
+
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-line);
+      display: flex;
+      justify-content: space-between;
+      color: var(--caption);
+      font-size: 12px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="masthead-title">The Adland <span>Canvas</span></div>
+      <div class="masthead-meta">
+        Daily Intelligence · Indian Agencies<br>
+        Curated for Designers & Marketers
+      </div>
+    </header>
+
+    <div class="meta-bar">
+      <div>Vol. 11 · Issue 316</div>
+      <div class="badge">Daily Broadsheet Edition</div>
+      <div>Real-Time Agency Radar</div>
+    </div>
+
+    <div class="newspaper-grid">
+      <article class="lead-story">
+        <div class="kicker">Lead Story</div>
+        <h1 class="display-title">Fetching Latest Industry <span>Updates</span></h1>
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80" alt="Creative Strategy Board" class="story-image">
+        <div class="body-copy">
+          The GitHub scraper will automatically replace this text with the latest lead story regarding Indian advertising agency account wins and campaigns upon its next run.
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="card accent">
+          <span class="tag-pill">Design Student Resource</span>
+          <div class="kicker">AI Prompt of the Day</div>
+          <div class="card-title">Practice: Editorial Layouts</div>
+          <p style="font-size: 13.5px; color: var(--body-muted);">
+            /imagine prompt: A brutalist editorial newspaper layout, heavy black ink on cream paper, neon orange accent colors, bold typography, high contrast --ar 3:4 --v 6.0
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="tag-pill">Industry Update</span>
+          <div class="kicker">Agency News</div>
+          <div class="card-title">Pending Update...</div>
+          <p style="font-size: 13.5px; color: var(--body-muted);">
+            Awaiting automated sync from Google News RSS feed.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="tag-pill">Campaign Rollout</span>
+          <div class="kicker">Brand Update</div>
+          <div class="card-title">Pending Update...</div>
+          <p style="font-size: 13.5px; color: var(--body-muted);">
+            Awaiting automated sync from Google News RSS feed.
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="bottom-section">
+      <div class="section-title">New Campaign <span>Rollouts</span></div>
+      <div class="three-col">
+        <div class="card">
+          <div class="kicker">Update 1</div>
+          <div class="card-title">Syncing Data...</div>
+          <p style="font-size: 13px; color: var(--body-muted); margin-top: 8px;">
+            Content will generate on next run.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="kicker">Update 2</div>
+          <div class="card-title">Syncing Data...</div>
+          <p style="font-size: 13px; color: var(--body-muted); margin-top: 8px;">
+            Content will generate on next run.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="kicker">Update 3</div>
+          <div class="card-title">Syncing Data...</div>
+          <p style="font-size: 13px; color: var(--body-muted); margin-top: 8px;">
+            Content will generate on next run.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2026 The Adland Canvas · Independent Design & Agency Intelligence</div>
+      <div style="width: 100%; margin-top: 8px;">Palette: Ink #0E0D0C · Orange #F04D23 · Big Shoulders Display</div>
+    </footer>
+  </div>
+</body>
+</html>
